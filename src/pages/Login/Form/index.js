@@ -1,8 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
-
-import useAuth from '../../../hooks/useAuth';
 
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
@@ -14,7 +13,7 @@ const Form = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { setUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -30,8 +29,10 @@ const Form = () => {
         }
       );
 
-      setUser(data);
-      localStorage.setItem('token', data.token);
+      const serializedUser = JSON.stringify(data);
+      localStorage.setItem('user', serializedUser);
+
+      navigate('/hoje');
     } catch (error) {
       alert(error.response.data.message);
     } finally {
