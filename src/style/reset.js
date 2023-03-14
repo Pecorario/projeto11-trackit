@@ -26,8 +26,9 @@ const ResetStyle = createGlobalStyle`
 	footer, header, hgroup, menu, nav, section {
 		display: block;
 	}
-	body {
+	body, * {
 		line-height: 1;
+		box-sizing: border-box;
 	}
 	ol, ul {
 		list-style: none;
@@ -43,6 +44,9 @@ const ResetStyle = createGlobalStyle`
 	table {
 		border-collapse: collapse;
 		border-spacing: 0;
+	}
+	button {
+		border: none;
 	}
 `;
 

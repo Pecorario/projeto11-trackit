@@ -11,6 +11,7 @@ const theme = createTheme({
     background: '#F2F2F2',
     textDark: '#666666',
     textLight: '#DBDBDB',
+    textDisabled: '#AFAFAF',
     green: '#8FC549'
   }
 });

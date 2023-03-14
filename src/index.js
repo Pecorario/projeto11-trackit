@@ -17,6 +17,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <ResetStyle />
       <GlobalStyle />
+
       <BrowserRouter>
         <App />
       </BrowserRouter>
