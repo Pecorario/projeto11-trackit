@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-
-import useApp from '../../hooks/useApp';
+import { useLocation } from 'react-router-dom';
 
 import Footer from '../Footer';
 import Header from '../Header';
@@ -8,19 +6,14 @@ import Header from '../Header';
 import * as S from './style';
 
 const Layout = ({ children }) => {
-  const [hasUser, setHasUser] = useState(false);
+  const location = useLocation();
 
-  const { user } = useApp();
-
-  useEffect(() => {
-    if (user) {
-      setHasUser(true);
-    }
-  }, [user]);
+  const isLoggedOut =
+    location.pathname === '/' || location.pathname === 'cadastro';
 
   return (
-    <S.Container isAuthPages={!hasUser}>
-      {!hasUser ? (
+    <S.Container isAuthPages={isLoggedOut}>
+      {isLoggedOut ? (
         children
       ) : (
         <>
