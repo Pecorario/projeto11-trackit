@@ -21,9 +21,13 @@ const AppContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const percentageNumber = Math.round((doneHabits / totalHabits) * 100);
+    if (totalHabits === 0) {
+      setPercentage(0);
+    } else {
+      const percentageNumber = Math.round((doneHabits / totalHabits) * 100);
 
-    setPercentage(percentageNumber);
+      setPercentage(percentageNumber);
+    }
   }, [doneHabits, totalHabits]);
 
   return (

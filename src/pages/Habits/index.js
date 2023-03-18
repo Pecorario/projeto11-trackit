@@ -14,6 +14,7 @@ import * as S from './style';
 const Habits = () => {
   const [isNewHabitOpen, setIsNewHabitOpen] = useState(false);
   const [habits, setHabits] = useState(undefined);
+  const [isLoadingNewHabit, setIsLoadingNewHabit] = useState(false);
 
   const ref = useRef(null);
 
@@ -51,6 +52,7 @@ const Habits = () => {
           height="35px"
           color="primary"
           text={<GoPlus />}
+          disabled={isLoadingNewHabit}
           onClick={handleOpenNewHabit}
           data-test="habit-create-btn"
         />
@@ -62,6 +64,8 @@ const Habits = () => {
               setIsNewHabitOpen={setIsNewHabitOpen}
               setHabits={setHabits}
               habits={habits}
+              isLoadingNewHabit={isLoadingNewHabit}
+              setIsLoadingNewHabit={setIsLoadingNewHabit}
             />
           )}
 

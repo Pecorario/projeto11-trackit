@@ -36,20 +36,18 @@ const TodayHabit = ({ habit, habits, setHabits, handleLoadTodayHabits }) => {
       <S.TextsContainer>
         <S.Title data-test="today-habit-name">{habit.name}</S.Title>
 
-        <S.Text data-test="today-habit-sequence">
+        <S.Text>
           Sequência atual:
-          <S.Span isGreen={habit.done}>
+          <S.Span data-test="today-habit-sequence" isGreen={habit.done}>
             {' '}
             {habit.currentSequence}{' '}
             {habit.currentSequence === 1 ? 'dia' : 'dias'}
           </S.Span>
         </S.Text>
-        <S.Text
-          data-test="today-habit-record"
-          isGreen={habit.currentSequence === habit.highestSequence}
-        >
+        <S.Text isGreen={habit.currentSequence === habit.highestSequence}>
           Seu recorde:
           <S.Span
+            data-test="today-habit-record"
             isGreen={
               habit.currentSequence === habit.highestSequence &&
               habit.highestSequence > 0

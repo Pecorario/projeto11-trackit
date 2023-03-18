@@ -8,8 +8,13 @@ import Input from '../../components/Input';
 
 import * as S from './style';
 
-const NewHabit = ({ setIsNewHabitOpen, habits, setHabits }) => {
-  const [isLoading, setIsLoading] = useState(false);
+const NewHabit = ({
+  setIsNewHabitOpen,
+  habits,
+  setHabits,
+  isLoadingNewHabit,
+  setIsLoadingNewHabit
+}) => {
   const [habitName, setHabitName] = useState('');
   const [weekdays, setWeekdays] = useState([]);
 
@@ -46,7 +51,7 @@ const NewHabit = ({ setIsNewHabitOpen, habits, setHabits }) => {
       }
 
       if (habitName.length > 0 && weekdays.length > 0) {
-        setIsLoading(true);
+        setIsLoadingNewHabit(true);
 
         const { data } = await api.post('/trackit/habits', {
           name: habitName,
@@ -63,7 +68,7 @@ const NewHabit = ({ setIsNewHabitOpen, habits, setHabits }) => {
     } catch (error) {
       alert(error.response.data.message);
     } finally {
-      setIsLoading(false);
+      setIsLoadingNewHabit(false);
       setHabitName('');
       setWeekdays([]);
     }
@@ -74,7 +79,7 @@ const NewHabit = ({ setIsNewHabitOpen, habits, setHabits }) => {
       <Input
         value={habitName}
         placeholder="nome do hábito"
-        isLoading={isLoading}
+        isLoading={isLoadingNewHabit}
         data-test="habit-name-input"
         onChange={e => setHabitName(e.target.value)}
       />
@@ -84,7 +89,7 @@ const NewHabit = ({ setIsNewHabitOpen, habits, setHabits }) => {
           <S.WeekdayButton
             key={day.id}
             type="button"
-            disabled={isLoading}
+            disabled={isLoadingNewHabit}
             isSelected={weekdays.includes(day.id)}
             onClick={() => handleSelectDay(day)}
             data-test="habit-day"
@@ -102,7 +107,7 @@ const NewHabit = ({ setIsNewHabitOpen, habits, setHabits }) => {
           text="Cancelar"
           type="button"
           fontSize="16px"
-          disabled={isLoading}
+          disabled={isLoadingNewHabit}
           onClick={() => setIsNewHabitOpen(false)}
           data-test="habit-create-cancel-btn"
         />
@@ -112,7 +117,7 @@ const NewHabit = ({ setIsNewHabitOpen, habits, setHabits }) => {
           color="primary"
           text="Salvar"
           fontSize="16px"
-          isLoading={isLoading}
+          isLoading={isLoadingNewHabit}
           data-test="habit-create-save-btn"
         />
       </S.ContainerButtons>
