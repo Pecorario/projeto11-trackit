@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   const location = useLocation();
 
   const isLoggedOut =
-    location.pathname === '/' || location.pathname === 'cadastro';
+    location.pathname === '/' || location.pathname === '/cadastro';
 
   return (
     <S.Container isAuthPages={isLoggedOut}>
