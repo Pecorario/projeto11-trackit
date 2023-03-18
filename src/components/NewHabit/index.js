@@ -93,6 +93,7 @@ const NewHabit = ({
           fontSize="16px"
           disabled={isLoading}
           onClick={() => setIsNewHabitOpen(false)}
+          data-test="habit-create-cancel-btn"
         />
         <Button
           width="90px"
@@ -101,6 +102,7 @@ const NewHabit = ({
           text="Salvar"
           fontSize="16px"
           isLoading={isLoading}
+          data-test="habit-create-save-btn"
         />
       </S.ContainerButtons>
     </S.Form>
