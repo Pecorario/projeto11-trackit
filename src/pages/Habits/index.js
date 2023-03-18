@@ -51,10 +51,13 @@ const Habits = () => {
           width="40px"
           height="35px"
           color="primary"
-          text={<GoPlus />}
-          disabled={isLoadingNewHabit}
+          text="+"
+          fontSize="25px"
+          // lineHeight="31px"
+          hasLoadingMode={false}
+          isLoading={isLoadingNewHabit}
           onClick={handleOpenNewHabit}
-          typeButton="habit-create-btn"
+          data-test="habit-create-btn"
         />
       </S.TitleContainer>
       {!isLoading && (

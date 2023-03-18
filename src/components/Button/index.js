@@ -9,6 +9,7 @@ const Button = ({
   fontSize,
   isLoading,
   typeButton,
+  hasLoadingMode = true,
   ...props
 }) => {
   return (
@@ -18,10 +19,9 @@ const Button = ({
       height={height}
       fontSize={fontSize}
       disabled={isLoading}
-      data-test={typeButton}
       {...props}
     >
-      {isLoading ? (
+      {isLoading && hasLoadingMode ? (
         <ThreeDots
           height="13px"
           radius="9"
