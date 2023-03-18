@@ -62,8 +62,7 @@ const Habits = () => {
           {isNewHabitOpen && (
             <NewHabit
               setIsNewHabitOpen={setIsNewHabitOpen}
-              setHabits={setHabits}
-              habits={habits}
+              handleLoadHabits={handleLoadHabits}
               isLoadingNewHabit={isLoadingNewHabit}
               setIsLoadingNewHabit={setIsLoadingNewHabit}
             />

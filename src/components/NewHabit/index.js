@@ -10,8 +10,7 @@ import * as S from './style';
 
 const NewHabit = ({
   setIsNewHabitOpen,
-  habits,
-  setHabits,
+  handleLoadHabits,
   isLoadingNewHabit,
   setIsLoadingNewHabit
 }) => {
@@ -53,20 +52,22 @@ const NewHabit = ({
       if (habitName.length > 0 && weekdays.length > 0) {
         setIsLoadingNewHabit(true);
 
-        const { data } = await api.post('/trackit/habits', {
+        await api.post('/trackit/habits', {
           name: habitName,
           days: weekdays
         });
 
-        const newHabits = [...habits];
-        newHabits.push(data);
-        setHabits(newHabits);
+        // const newHabits = [...habits];
+        // newHabits.push(data);
+        // setHabits(newHabits);
 
-        // setIsNewHabitOpen(false);
+        setIsNewHabitOpen(false);
         setTotalHabits(prevState => prevState + 1);
 
         setHabitName('');
         setWeekdays([]);
+
+        handleLoadHabits();
       }
     } catch (error) {
       alert(error.response.data.message);
