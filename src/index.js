@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import AppContext from './context/AppContext';
+
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
@@ -19,7 +21,9 @@ root.render(
       <GlobalStyle />
 
       <BrowserRouter>
-        <App />
+        <AppContext>
+          <App />
+        </AppContext>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>

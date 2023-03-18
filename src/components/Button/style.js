@@ -12,18 +12,34 @@ export const ButtonContainer = styled.button`
   justify-content: center;
   align-items: center;
 
+  cursor: pointer;
+
   ${props =>
     props.color === 'primary'
       ? css`
           background: ${props.theme.colors.lightBlue};
           color: ${props.theme.colors.white};
+
+          :not(:disabled):hover {
+            filter: brightness(0.8);
+          }
         `
       : css`
-          background: ${props.theme.colors.white};
+          background: transparent;
           color: ${props.theme.colors.lightBlue};
+
+          :not(:disabled):hover {
+            color: ${props.theme.colors.darkBlue};
+          }
         `}
 
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
   :disabled {
+    cursor: not-allowed;
     opacity: 0.7;
   }
 `;

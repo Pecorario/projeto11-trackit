@@ -1,7 +1,10 @@
+import useApp from '../../hooks/useApp';
+
 import * as S from './style';
 
 const Header = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const { user } = useApp();
+
   return (
     <S.Container data-test="header">
       <S.Title>TrackIt</S.Title>

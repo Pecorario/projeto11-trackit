@@ -1,11 +1,26 @@
+import { useEffect, useState } from 'react';
+
+import useApp from '../../hooks/useApp';
+
 import Footer from '../Footer';
 import Header from '../Header';
+
 import * as S from './style';
 
-const Layout = ({ isAuthPages = true, children }) => {
+const Layout = ({ children }) => {
+  const [hasUser, setHasUser] = useState(false);
+
+  const { user } = useApp();
+
+  useEffect(() => {
+    if (user) {
+      setHasUser(true);
+    }
+  }, [user]);
+
   return (
-    <S.Container isAuthPages={isAuthPages}>
-      {isAuthPages ? (
+    <S.Container isAuthPages={!hasUser}>
+      {!hasUser ? (
         children
       ) : (
         <>

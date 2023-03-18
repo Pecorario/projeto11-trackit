@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
+import api from '../../../services/api';
 
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
@@ -23,15 +23,12 @@ const Form = () => {
     try {
       setIsLoading(true);
 
-      await axios.post(
-        'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',
-        {
-          email,
-          password,
-          name,
-          image: profilePicture
-        }
-      );
+      await api.post('/trackit/auth/sign-up', {
+        email,
+        password,
+        name,
+        image: profilePicture
+      });
 
       navigate('/');
     } catch (error) {

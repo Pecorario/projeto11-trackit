@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
+import api from '../../../services/api';
+import useApp from '../../../hooks/useApp';
 
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
@@ -15,23 +16,23 @@ const Form = () => {
 
   const navigate = useNavigate();
 
+  const { setUser } = useApp();
+
   const handleSubmit = async e => {
     e.preventDefault();
 
     try {
       setIsLoading(true);
 
-      const { data } = await axios.post(
-        'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',
-        {
-          email,
-          password
-        }
-      );
+      const { data } = await api.post('/trackit/auth/login', {
+        email,
+        password
+      });
 
       const serializedUser = JSON.stringify(data);
       localStorage.setItem('user', serializedUser);
 
+      setUser(data);
       navigate('/hoje');
     } catch (error) {
       alert(error.response.data.message);

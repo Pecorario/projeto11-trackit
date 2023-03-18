@@ -21,6 +21,8 @@ export const CircularBar = styled(CircularProgressbar)`
   width: 91px;
   height: 91px;
 
+  cursor: pointer;
+
   path {
     stroke-linecap: round;
     transition: stroke-dashoffset 0.5s ease 0s;
@@ -30,6 +32,14 @@ export const CircularBar = styled(CircularProgressbar)`
     font-size: 18px;
     dominant-baseline: middle;
     text-anchor: middle;
+  }
+
+  .CircularProgressbar-background {
+    fill: ${({ theme }) => theme.colors.lightBlue};
+  }
+
+  :hover .CircularProgressbar-background {
+    fill: ${({ theme }) => theme.colors.darkBlue};
   }
 `;
 

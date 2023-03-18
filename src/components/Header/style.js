@@ -7,6 +7,7 @@ export const Container = styled.header`
   padding: 0 18px;
 
   background: ${({ theme }) => theme.colors.darkBlue};
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
   position: fixed;
   top: 0;

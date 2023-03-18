@@ -1,44 +1,46 @@
-import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
-import AuthContext from './context/Auth';
+import useApp from './hooks/useApp';
 
 import Layout from './components/Layout';
+import Loading from './components/Loading';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Today from './pages/Today';
+import Habits from './pages/Habits';
 
 const App = () => {
-  const [hasUser, setHasUser] = useState(false);
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { setUser, isLoading } = useApp();
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if (user) {
-      setHasUser(true);
-    }
-  }, [navigate]);
+      setUser(user);
 
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-
-    if (user) {
-      setHasUser(true);
-      navigate('/hoje');
+      if (location.pathname === '/' || location.pathname === '/register') {
+        navigate('/hoje');
+      }
     }
   }, []);
 
   return (
-    <AuthContext>
-      <Layout isAuthPages={!hasUser}>
+    <>
+      {isLoading && <Loading />}
+      <Layout>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Register />} />
+          <Route path="/hoje" element={<Today />} />
+          <Route path="/habitos" element={<Habits />} />
         </Routes>
       </Layout>
-    </AuthContext>
+    </>
   );
 };
 
