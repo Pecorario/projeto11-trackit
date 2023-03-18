@@ -38,7 +38,12 @@ const TodayHabit = ({ habit, habits, setHabits, handleLoadTodayHabits }) => {
 
         <S.Text>
           Sequência atual:
-          <S.Span data-test="today-habit-sequence" isGreen={habit.done}>
+          <S.Span
+            data-test="today-habit-sequence"
+            isGreen={
+              habit.currentSequence === habit.highestSequence || habit.done
+            }
+          >
             {' '}
             {habit.currentSequence}{' '}
             {habit.currentSequence === 1 ? 'dia' : 'dias'}

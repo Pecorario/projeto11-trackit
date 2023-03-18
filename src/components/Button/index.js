@@ -8,6 +8,7 @@ const Button = ({
   height,
   fontSize,
   isLoading,
+  typeButton,
   ...props
 }) => {
   return (
@@ -17,6 +18,7 @@ const Button = ({
       height={height}
       fontSize={fontSize}
       disabled={isLoading}
+      data-test={typeButton}
       {...props}
     >
       {isLoading ? (

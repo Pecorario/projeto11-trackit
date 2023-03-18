@@ -54,7 +54,7 @@ const Habits = () => {
           text={<GoPlus />}
           disabled={isLoadingNewHabit}
           onClick={handleOpenNewHabit}
-          data-test="habit-create-btn"
+          typeButton="habit-create-btn"
         />
       </S.TitleContainer>
       {!isLoading && (
