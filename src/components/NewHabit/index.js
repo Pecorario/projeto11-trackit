@@ -1,21 +1,19 @@
 import { useState } from 'react';
 
 import api from '../../services/api';
+import useApp from '../../hooks/useApp';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 import * as S from './style';
 
-const NewHabit = ({
-  habitName,
-  setHabitName,
-  weekdays,
-  setWeekdays,
-  setIsNewHabitOpen,
-  handleLoadHabits
-}) => {
+const NewHabit = ({ setIsNewHabitOpen, habits, setHabits }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [habitName, setHabitName] = useState('');
+  const [weekdays, setWeekdays] = useState([]);
+
+  const { setTotalHabits } = useApp();
 
   const days = [
     { id: 0, name: 'D' },
@@ -39,15 +37,29 @@ const NewHabit = ({
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      setIsLoading(true);
+      if (habitName.length === 0) {
+        alert('O nome não pode ser vazio');
+      }
 
-      await api.post('/trackit/habits', {
-        name: habitName,
-        days: weekdays
-      });
+      if (weekdays.length === 0) {
+        alert('Selecione pelo menos um dia da semana');
+      }
 
-      handleLoadHabits();
-      setIsNewHabitOpen(false);
+      if (habitName.length > 0 && weekdays.length > 0) {
+        setIsLoading(true);
+
+        const { data } = await api.post('/trackit/habits', {
+          name: habitName,
+          days: weekdays
+        });
+
+        const newHabits = [...habits];
+        newHabits.push(data);
+        setHabits(newHabits);
+
+        setIsNewHabitOpen(false);
+        setTotalHabits(prevState => prevState + 1);
+      }
     } catch (error) {
       alert(error.response.data.message);
     } finally {
@@ -60,7 +72,6 @@ const NewHabit = ({
   return (
     <S.Form onSubmit={handleSubmit} data-test="habit-create-container">
       <Input
-        required
         value={habitName}
         placeholder="nome do hábito"
         isLoading={isLoading}

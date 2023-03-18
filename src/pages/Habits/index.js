@@ -14,8 +14,6 @@ import * as S from './style';
 const Habits = () => {
   const [isNewHabitOpen, setIsNewHabitOpen] = useState(false);
   const [habits, setHabits] = useState(undefined);
-  const [habitName, setHabitName] = useState('');
-  const [weekdays, setWeekdays] = useState([]);
 
   const ref = useRef(null);
 
@@ -61,12 +59,9 @@ const Habits = () => {
         <S.ContainerHabits ref={ref}>
           {isNewHabitOpen && (
             <NewHabit
-              habitName={habitName}
-              setHabitName={setHabitName}
               setIsNewHabitOpen={setIsNewHabitOpen}
-              weekdays={weekdays}
-              setWeekdays={setWeekdays}
-              handleLoadHabits={handleLoadHabits}
+              setHabits={setHabits}
+              habits={habits}
             />
           )}
 
@@ -78,15 +73,16 @@ const Habits = () => {
                 id={item.id}
                 name={item.name}
                 selectedDays={item.days}
-                handleLoadHabits={handleLoadHabits}
+                habits={habits}
+                setHabits={setHabits}
               />
             ))}
 
           {habits !== undefined && habits.length === 0 && (
-            <S.Span>
+            <S.Text>
               Você não tem nenhum hábito cadastrado ainda. Adicione um hábito
               para começar a trackear!
-            </S.Span>
+            </S.Text>
           )}
         </S.ContainerHabits>
       )}

@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react';
 
 import api from '../../services/api';
+import useApp from '../../hooks/useApp';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
 import Title from '../../components/Title';
 
 import * as S from './style';
+import TodayHabit from '../../components/TodayHabit';
 
 const Today = () => {
   const [habits, setHabits] = useState([]);
   const [currentWeekDay, setCurrentWeekDay] = useState('');
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
+
+  const { setIsLoading, percentage, setDoneHabits, setTotalHabits } = useApp();
 
   const days = [
     'Domingo',
@@ -28,11 +32,19 @@ const Today = () => {
 
   const handleLoadTodayHabits = async () => {
     try {
-      const data = await api.get('/trackit/habits/today');
+      setIsLoading(true);
+      const { data } = await api.get('/trackit/habits/today');
+
+      const filteredData = data.filter(item => item.done === true);
+
+      setTotalHabits(data.length);
+      setDoneHabits(filteredData.length);
 
       setHabits(data);
     } catch (error) {
-      alert(error);
+      alert(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,18 +52,39 @@ const Today = () => {
     handleLoadTodayHabits();
 
     const weekday = days[dayjs().day()];
+    const monthFormated = (dayjs().month() + 1).toLocaleString('pt-BR', {
+      minimumIntegerDigits: 2,
+      useGrouping: false
+    });
 
     setCurrentWeekDay(weekday);
     setDay(dayjs().date());
-    setMonth(dayjs().month() + 1);
+    setMonth(monthFormated);
   }, []);
 
   return (
     <S.Container>
-      <Title page="today" text={`${currentWeekDay}, ${day}/${month}`} />
-      <span>Nenhum hábito concluído ainda</span>
+      <S.TitleContainer>
+        <Title page="today" text={`${currentWeekDay}, ${day}/${month}`} />
+        <S.Text hasSomeHabitDone={percentage > 0} data-test="today-counter">
+          {percentage === 0
+            ? 'Nenhum hábito concluído ainda'
+            : `${percentage}% dos hábitos concluídos`}
+        </S.Text>
+      </S.TitleContainer>
 
-      {habits.length > 0 && habits.map(habit => <p>{habit.name}</p>)}
+      <S.TodayHabitsContainer>
+        {habits.length > 0 &&
+          habits.map(habit => (
+            <TodayHabit
+              key={habit.id}
+              habit={habit}
+              habits={habits}
+              setHabits={setHabits}
+              handleLoadTodayHabits={handleLoadTodayHabits}
+            />
+          ))}
+      </S.TodayHabitsContainer>
     </S.Container>
   );
 };

@@ -1,11 +1,15 @@
 import { buildStyles } from 'react-circular-progressbar';
 import { useNavigate } from 'react-router-dom';
 
+import useApp from '../../hooks/useApp';
+
 import Button from '../Button';
 
 import * as S from './style';
 
 const Footer = () => {
+  const { percentage } = useApp();
+
   const navigate = useNavigate();
 
   return (
@@ -21,7 +25,7 @@ const Footer = () => {
       />
       <S.BarContainer data-test="today-link" onClick={() => navigate('/hoje')}>
         <S.CircularBar
-          value="50"
+          value={percentage}
           text="Hoje"
           background
           backgroundPadding={6}

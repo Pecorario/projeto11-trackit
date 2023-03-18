@@ -5,7 +5,7 @@ import trashImg from '../../assets/trash.svg';
 
 import * as S from './style';
 
-const Habit = ({ id, name, selectedDays, handleLoadHabits }) => {
+const Habit = ({ id, name, selectedDays, habits, setHabits }) => {
   const days = [
     { id: 0, name: 'D' },
     { id: 1, name: 'S' },
@@ -16,7 +16,7 @@ const Habit = ({ id, name, selectedDays, handleLoadHabits }) => {
     { id: 6, name: 'S' }
   ];
 
-  const { setIsLoading } = useApp();
+  const { setIsLoading, getPercentage } = useApp();
 
   const handleDeleteHabit = async () => {
     try {
@@ -24,10 +24,12 @@ const Habit = ({ id, name, selectedDays, handleLoadHabits }) => {
 
       if (response) {
         setIsLoading(true);
+        const newHabits = habits.filter(item => item.id !== id);
 
         await api.delete(`/trackit/habits/${id}`);
 
-        handleLoadHabits();
+        getPercentage();
+        setHabits(newHabits);
       }
     } catch (error) {
       alert(error.response.data.message);

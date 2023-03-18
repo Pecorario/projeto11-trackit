@@ -10,7 +10,8 @@ const theme = createTheme({
     lighterGray: '#E7E7E7',
     background: '#F2F2F2',
     textDark: '#666666',
-    textLight: '#DBDBDB',
+    textLight: '#BABABA',
+    textLighter: '#DBDBDB',
     textDisabled: '#AFAFAF',
     green: '#8FC549'
   }

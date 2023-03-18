@@ -7,8 +7,10 @@ export const Container = styled.div`
 
 export const TitleContainer = styled.div`
   width: 100%;
+
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   background: ${({ theme }) => theme.colors.background};
 
@@ -16,7 +18,7 @@ export const TitleContainer = styled.div`
   top: 0;
 `;
 
-export const Span = styled.p`
+export const Text = styled.p`
   font-size: 18px;
   line-height: 22px;
   margin-top: 8px;

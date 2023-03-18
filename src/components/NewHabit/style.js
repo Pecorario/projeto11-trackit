@@ -40,7 +40,7 @@ export const WeekdayButton = styled.button`
       : css`
           background: transparent;
           border: 1px solid ${theme.colors.lightGray};
-          color: ${theme.colors.textLight};
+          color: ${theme.colors.textLighter};
         `}
 
   :disabled {

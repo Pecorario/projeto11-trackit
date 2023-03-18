@@ -18,7 +18,7 @@ const ResetStyle = createGlobalStyle`
 		padding: 0;
 		border: 0;
 		font-size: 100%;
-		font: inherit;
+		/* font: inherit; */
 		vertical-align: baseline;
 	}
 	/* HTML5 display-role reset for older browsers */
@@ -47,6 +47,10 @@ const ResetStyle = createGlobalStyle`
 	}
 	button {
 		border: none;
+	}
+
+	input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0 30px white inset;
 	}
 `;
 

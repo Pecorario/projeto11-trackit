@@ -18,6 +18,6 @@ export const InputContainer = styled.input`
   }
 
   ::placeholder {
-    color: ${({ theme }) => theme.colors.textLight};
+    color: ${({ theme }) => theme.colors.textLighter};
   }
 `;
