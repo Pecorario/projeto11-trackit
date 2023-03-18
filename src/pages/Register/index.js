@@ -12,7 +12,7 @@ const Register = () => {
       <Form />
       <LinkButton
         goTo="/"
-        text="Não tem uma conta? Cadastre-se"
+        text="Já tem uma conta? Faça login!"
         type="register"
       />
     </S.Container>
