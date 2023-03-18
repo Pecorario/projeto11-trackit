@@ -62,15 +62,16 @@ const NewHabit = ({
         newHabits.push(data);
         setHabits(newHabits);
 
-        setIsNewHabitOpen(false);
+        // setIsNewHabitOpen(false);
         setTotalHabits(prevState => prevState + 1);
+
+        setHabitName('');
+        setWeekdays([]);
       }
     } catch (error) {
       alert(error.response.data.message);
     } finally {
       setIsLoadingNewHabit(false);
-      setHabitName('');
-      setWeekdays([]);
     }
   };
 

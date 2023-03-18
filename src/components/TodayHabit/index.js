@@ -44,7 +44,7 @@ const TodayHabit = ({ habit, habits, setHabits, handleLoadTodayHabits }) => {
             {habit.currentSequence === 1 ? 'dia' : 'dias'}
           </S.Span>
         </S.Text>
-        <S.Text isGreen={habit.currentSequence === habit.highestSequence}>
+        <S.Text>
           Seu recorde:
           <S.Span
             data-test="today-habit-record"
