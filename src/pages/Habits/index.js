@@ -51,9 +51,8 @@ const Habits = () => {
           width="40px"
           height="35px"
           color="primary"
-          text="+"
+          text={<GoPlus />}
           fontSize="25px"
-          // lineHeight="31px"
           hasLoadingMode={false}
           isLoading={isLoadingNewHabit}
           onClick={handleOpenNewHabit}
